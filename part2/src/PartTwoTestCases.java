@@ -15,7 +15,7 @@ import org.junit.Test;
 
 public class PartTwoTestCases
 {
-   
+
    public static final double DELTA = 0.00001;
 
    @Test
