@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.Arrays;
 import java.util.List;
+import java.util.*;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
@@ -15,6 +16,93 @@ import org.junit.Test;
 public class PartTwoTestCases
 {
    public static final double DELTA = 0.00001;
+
+   @Test
+   public void testPerimPoly() {
+        List < Point >points = new ArrayList < Point >(); 
+        points.add(new Point(0, 0));
+        points.add(new Point(3,0));
+        points.add(new Point(0,4));
+        double d = new Polygon(points).perimeter();
+        assertEquals(12.0, d, DELTA);
+   }
+
+   @Test
+   public void testCircle() {
+      Circle circle = new Circle(new Point(1.0, 1.0), 1);
+      assertEquals(1.0, circle.getCenter().getX(), DELTA);
+      assertEquals(1.0, circle.getCenter().getY(), DELTA);
+      assertEquals(1.0, circle.getRadius(), DELTA);
+   }
+
+   @Test
+   public void testRectangle() {
+      Rectangle rectangle = new Rectangle(new Point(-1.0, 1.0), new Point(1.0, -1.6));
+      assertEquals(-1.0, rectangle.getTopLeft().getX(), DELTA);
+      assertEquals(1.0, rectangle.getTopLeft().getY(), DELTA);
+      assertEquals(1.0, rectangle.getBottomRight().getX(), DELTA);
+      assertEquals(-1.6, rectangle.getBottomRight().getY(), DELTA);
+   }
+
+   @Test
+   public void testPolygon() {
+      List <Point>points = new ArrayList <Point>(); 
+      points.add(new Point(0, 0));
+      points.add(new Point(3,1));
+      points.add(new Point(1,4));
+      points.add(new Point(-1,4));
+      Polygon polygon = new Polygon(points);
+      assertEquals(0.0, polygon.getPoints().get(0).getX(), DELTA);
+      assertEquals(0.0, polygon.getPoints().get(0).getY(), DELTA);
+      assertEquals(3.0, polygon.getPoints().get(1).getX(), DELTA);
+      assertEquals(1.0, polygon.getPoints().get(1).getY(), DELTA);
+      assertEquals(1.0, polygon.getPoints().get(2).getX(), DELTA);
+      assertEquals(4.0, polygon.getPoints().get(2).getY(), DELTA);
+      assertEquals(-1.0, polygon.getPoints().get(3).getX(), DELTA);
+      assertEquals(4.0, polygon.getPoints().get(3).getY(), DELTA);
+   }
+
+   @Test
+   public void testCircPerimeter() {
+      Circle circle = new Circle(new Point(1.0, 1.0), 1);
+      assertEquals(2*Math.PI, circle.perimeter(), DELTA);
+   }
+
+   @Test
+   public void testCircPerimeter2() {
+      Circle circle = new Circle(new Point(1.0, 1.0), 0);
+      assertEquals(0, circle.perimeter(), DELTA);
+   }
+
+   @Test
+   public void testRecPerimeter() {
+      Rectangle rectangle = new Rectangle(new Point(-1.0, 1.0), new Point(1.0, -1.6));
+      assertEquals(9.2, rectangle.perimeter(), DELTA);
+   }
+
+   @Test
+   public void testPolyPerimeter() {
+      List <Point>points = new ArrayList <Point>(); 
+      points.add(new Point(0, 0));
+      points.add(new Point(3,1));
+      points.add(new Point(1,4));
+      points.add(new Point(-1,4));
+      Polygon polygon = new Polygon(points);
+      assertEquals(12.89093, polygon.perimeter(), DELTA);
+   }
+
+   @Test
+   public void testBigger() {
+      Circle circle = new Circle(new Point(1.0, 1.0), 1);
+      Rectangle rectangle = new Rectangle(new Point(-1.0, 1.0), new Point(1.0, -1.6));
+      List <Point>points = new ArrayList <Point>(); 
+      points.add(new Point(0, 0));
+      points.add(new Point(3,1));
+      points.add(new Point(1,4));
+      points.add(new Point(-1,4));
+      Polygon polygon = new Polygon(points);
+      assertEquals(12.89093, Bigger.whichIsBigger(circle, rectangle, polygon), DELTA);
+   }
 
    @Test
    public void testCircleImplSpecifics()
