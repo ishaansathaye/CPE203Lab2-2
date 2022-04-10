@@ -105,6 +105,19 @@ public class PartTwoTestCases
    }
 
    @Test
+   public void testBigger2() {
+      Circle circle = new Circle(new Point(1.0, 1.0), 25);
+      Rectangle rectangle = new Rectangle(new Point(-1.0, 1.0), new Point(1.0, -1.6));
+      List <Point>points = new ArrayList <Point>(); 
+      points.add(new Point(0, 0));
+      points.add(new Point(3,1));
+      points.add(new Point(1,4));
+      points.add(new Point(-1,4));
+      Polygon polygon = new Polygon(points);
+      assertEquals(157.07963, Bigger.whichIsBigger(circle, rectangle, polygon), DELTA);
+   }
+
+   @Test
    public void testCircleImplSpecifics()
       throws NoSuchMethodException
    {
