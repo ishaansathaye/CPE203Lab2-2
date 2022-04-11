@@ -1,5 +1,3 @@
-package src;
-
 public class Circle {
 
     private Point center;

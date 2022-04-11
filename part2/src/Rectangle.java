@@ -1,5 +1,3 @@
-package src;
-
 public class Rectangle {
     
     private Point topLeft;
